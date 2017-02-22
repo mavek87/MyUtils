@@ -125,16 +125,16 @@ public final class Str {
     }
 
     private static void ifStringNullOrEmptyThrowIllegalArgumentException(String string) throws IllegalArgumentException {
-        if (isStringNullOrEmpty(string)) {
+        if (isNullOrEmpty(string)) {
             throw new IllegalArgumentException("argument passed is null or a empty string");
         }
     }
 
-    public static final boolean isStringNullOrEmpty(String string) {
+    public static final boolean isNullOrEmpty(String string) {
         return (string == null) || (string.trim().isEmpty());
     }
 
-    public static final boolean isStringNotNullOrEmpty(String string) {
-        return !isStringNullOrEmpty(string);
+    public static final boolean isNotNullOrEmpty(String string) {
+        return !isNullOrEmpty(string);
     }
 }

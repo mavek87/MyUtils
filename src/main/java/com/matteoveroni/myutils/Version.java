@@ -6,5 +6,5 @@ package com.matteoveroni.myutils;
  */
 public class Version {
 
-    public static final String NUMBER = "1.2";
+    public static final String NUMBER = "1.3";
 }

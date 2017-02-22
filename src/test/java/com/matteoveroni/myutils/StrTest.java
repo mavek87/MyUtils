@@ -44,7 +44,7 @@ public class StrTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void test_generateRndString_Using_LowRangeBound_GreaterThan_HiRangeBound_ThrowsIllegalArgumentException() {
+    public void test_generateRndLowercaseString_Using_LowRangeBound_GreaterThan_HiRangeBound_ThrowsIllegalArgumentException() {
         int lowBound = 2;
         int hiBound = 1;
 
@@ -53,7 +53,7 @@ public class StrTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void test_generateRndString_Using_LowRangeBound_SmallerThan_HiRangeBound_ThrowsIllegalArgumentException() {
+    public void test_generateRndLowercaseString_Using_LowRangeBound_SmallerThan_HiRangeBound_ThrowsIllegalArgumentException() {
         int hiBound = 2;
         int lowBound = hiBound;
 
@@ -86,14 +86,14 @@ public class StrTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void test_generateRndString_Using_FixedNumberOfLetters_SmallerThan_Zero_ThrowsIllegalArgumentException() {
+    public void test_generateRndLowercaseString_Using_FixedNumberOfLetters_SmallerThan_Zero_ThrowsIllegalArgumentException() {
         int numberOfLetters = -1;
 
         Str.generateRndLowercaseString(numberOfLetters);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void test_generateRndString_Using_FixedNumberOfLetters_EqualTo_Zero_ThrowsIllegalArgumentException() {
+    public void test_generateRndLowercaseString_Using_FixedNumberOfLetters_EqualTo_Zero_ThrowsIllegalArgumentException() {
         int numberOfLetters = 0;
 
         Str.generateRndLowercaseString(numberOfLetters);

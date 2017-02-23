@@ -1,5 +1,6 @@
 package com.matteoveroni.myutils;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
@@ -71,15 +72,15 @@ public class StrTest {
         for (int i = 0; i < NUMBER_OF_TESTS_REPETITIONS; i++) {
             String generatedString = Str.generateRndLowercaseString(randomNumberOfLettersRange);
 
-            assertTrue("genereted string lenght\'s should be greater than range low bound", 
+            assertTrue("genereted string lenght\'s should be greater than range low bound",
                     generatedString.length() >= lowBound
             );
-            
-            assertTrue("genereted string lenght\'s should be minor than range hi bound", 
+
+            assertTrue("genereted string lenght\'s should be minor than range hi bound",
                     generatedString.length() <= hiBound
             );
 
-            assertTrue("generated string should be only formed by all lowercase chars", 
+            assertTrue("generated string should be only formed by all lowercase chars",
                     Str.isStringFormedByOnlyLowercaseLetters(generatedString)
             );
         }
@@ -111,5 +112,29 @@ public class StrTest {
         assertTrue("generated string length should be equal to requested number of letters",
                 generatedString.length() == numberOfLetters
         );
+    }
+
+    @Test
+    public void test_capitalizeFirstLetter_of_lowercase_string_works() {
+        final String lowercaseString = "test";
+        assertEquals("Test", Str.capitalizeFirstLetter(lowercaseString));
+    }
+
+    @Test
+    public void test_capitalizeFirstLetter_of_uppercase_string_returnSameString() {
+        final String uppercaseString = "TEST";
+        assertEquals("TEST", Str.capitalizeFirstLetter(uppercaseString));
+    }
+
+    @Test
+    public void test_capitalizeFirstLetter_of_StringWithFirstCharacterEqualToNumber_returnsSameString() {
+        final String uppercaseString = "1esT";
+        assertEquals("1esT", Str.capitalizeFirstLetter(uppercaseString));
+    }
+
+    @Test
+    public void test_removeLastLetter_of_StringNotNullOrEmpty_Works() {
+        final String stringNotNullOrEmpty = "Test";
+        assertEquals("Tes", Str.removeLastLetter(stringNotNullOrEmpty));
     }
 }

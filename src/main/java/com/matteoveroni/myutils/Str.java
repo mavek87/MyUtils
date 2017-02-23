@@ -19,12 +19,28 @@ public final class Str {
     private static final Random RANDOM_GENERATOR = new SecureRandom();
     private static final Set<String> UNIQUE_RANDOM_STRINGS_GENERATED = new HashSet<>();
 
+    /**
+     *
+     * Method which concatenates each String passed into a unique string. (eg.
+     * Str.concat("Hello", " World!"); returns => "Hello World!".
+     *
+     * @param strings Strings to concatenate passed to this method
+     * @return The concatenation of each string passed to this method
+     */
     public static final String concat(String... strings) {
         StringBuilder stringBuilder = new StringBuilder();
         concatStrings(strings, stringBuilder);
         return stringBuilder.toString();
     }
 
+    /**
+     * Method which concatenates a collection of strings into a unique string.
+     *
+     * @param strings A collection of strings to concatenate into a unique
+     * string
+     * @return A unique string formed by the concatenation of a collection of
+     * strings
+     */
     public static final String concat(Collection<String> strings) {
         final StringBuilder stringBuilder = new StringBuilder();
         concatStrings(strings.toArray(new String[strings.size()]), stringBuilder);
@@ -38,20 +54,58 @@ public final class Str {
         return stringBuilder;
     }
 
+    /**
+     * Generate a random lowercase string with random length between a number of
+     * letter range. Each random string generated is also being stored in the
+     * RAM to be unique for this session.
+     *
+     * @param numberOfLettersRange The min and max length of the random string
+     * @return a unique random lowercase string with random length
+     * @throws IllegalArgumentException If numberOfLettersRange is invalid (eg.
+     * lowBoundRange greater or equal than hiBoundRange, or bounds are minor or
+     * equal than 0)
+     */
     public synchronized static final String generateUniqueRndLowercaseString(Range numberOfLettersRange) throws IllegalArgumentException {
-        ifRangeInvalidThrowIllegalArgumentException(numberOfLettersRange);
         String generatedString;
         do {
-            generatedString = generateRndLowercaseString(numberOfLettersRange);
+            try {
+                generatedString = generateRndLowercaseString(numberOfLettersRange);
+            } catch (IllegalArgumentException ex) {
+                throw new IllegalArgumentException(ex);
+            }
         } while (UNIQUE_RANDOM_STRINGS_GENERATED.contains(generatedString));
         UNIQUE_RANDOM_STRINGS_GENERATED.add(generatedString);
 
         return generatedString;
     }
 
+    /**
+     * Generate a random lowercase string with random length between a number of
+     * letter range.
+     *
+     * @param numberOfLettersRange The min and max length of the random string
+     * @return a random lowercase string with random length
+     * @throws IllegalArgumentException If numberOfLettersRange is invalid (eg.
+     * lowBoundRange greater or equal than hiBoundRange, or bounds are minor or
+     * equal than 0)
+     */
+    public static final String generateRndLowercaseString(Range numberOfLettersRange) throws IllegalArgumentException {
+        ifRangeInvalidThrowIllegalArgumentException(numberOfLettersRange);
+
+        int generatedNumberOfLetters = generateRandomNumberOfLetters(numberOfLettersRange);
+        return Str.generateRndLowercaseString(generatedNumberOfLetters);
+    }
+
+    /**
+     * Generate a random lowercase string
+     *
+     * @param numberOfLetters The fixed number of letter of the string
+     * @return a random lowercase string with fixed length
+     * @throws IllegalArgumentException If numberOfLetters is invalid (eg. minor
+     * or equal than zero)
+     */
     public static final String generateRndLowercaseString(int numberOfLetters) throws IllegalArgumentException {
         ifNumberOfLettersInvalidThrowIllegalArgumentException(numberOfLetters);
-
         StringBuilder randomString = new StringBuilder();
 
         for (int letterIndex = 0; letterIndex < numberOfLetters; letterIndex++) {
@@ -60,13 +114,6 @@ public final class Str {
         }
 
         return randomString.toString();
-    }
-
-    public static final String generateRndLowercaseString(Range numberOfLettersRange) throws IllegalArgumentException {
-        ifRangeInvalidThrowIllegalArgumentException(numberOfLettersRange);
-
-        int generatedNumberOfLetters = generateRandomNumberOfLetters(numberOfLettersRange);
-        return Str.generateRndLowercaseString(generatedNumberOfLetters);
     }
 
     private static int generateRandomNumberOfLetters(Range numberOfLettersRange) {
@@ -91,6 +138,56 @@ public final class Str {
         }
     }
 
+    /**
+     * Method which capitalize the first character of a string if it is a
+     * letter. Otherwise it returns the same string passed.
+     *
+     * @param string The original string to manipulate
+     * @return The original string with first character capitalized (if it was a
+     * letter)
+     * @throws IllegalArgumentException If the passed string is empty or null
+     */
+    public static final String capitalizeFirstLetter(String string) throws IllegalArgumentException {
+        ifStringNullOrEmptyThrowIllegalArgumentException(string);
+        if (Character.isLetter(string.charAt(0))) {
+            char firstCharacterOfString = Character.toUpperCase(string.charAt(0));
+            String stringAfterFirstCharacter = string.substring(1);
+
+            StringBuilder stringWithFirstLetterCapitalized = new StringBuilder(Character.toString(firstCharacterOfString));
+            stringWithFirstLetterCapitalized.append(stringAfterFirstCharacter);
+            string = stringWithFirstLetterCapitalized.toString();
+        }
+        return string;
+    }
+
+    /**
+     * Remove last letter/character of a string or throw
+     * IllegalArgumentException if it is empty or null
+     *
+     * @param string The original string to manipulate
+     * @return The original string without last letter
+     * @throws IllegalArgumentException If the passed string is empty or null
+     */
+    public static final String removeLastLetter(String string) throws IllegalArgumentException {
+        ifStringNullOrEmptyThrowIllegalArgumentException(string);
+        return string.substring(0, string.length() - 1);
+    }
+
+    private static void ifStringNullOrEmptyThrowIllegalArgumentException(String string) throws IllegalArgumentException {
+        if (isNullOrEmpty(string)) {
+            throw new IllegalArgumentException("argument passed is null or a empty string");
+        }
+    }
+
+    /**
+     * Method which evaluates whether the string is formed by only letters or
+     * not.
+     *
+     * @param string The original string to analyze
+     * @return A true or false boolean whether the string is formed by only
+     * letters or not
+     * @throws IllegalArgumentException If the passed string is empty or null
+     */
     public static final boolean isStringFormedByOnlyLetters(String string) throws IllegalArgumentException {
         ifStringNullOrEmptyThrowIllegalArgumentException(string);
 
@@ -102,6 +199,15 @@ public final class Str {
         return true;
     }
 
+    /**
+     * Method which evaluates whether the string is formed by only lowercase
+     * letters or not.
+     *
+     * @param string The original string to analyze
+     * @return A true or false boolean whether the string is formed by only
+     * lowercase letters or not
+     * @throws IllegalArgumentException If the passed string is empty or null
+     */
     public static final boolean isStringFormedByOnlyLowercaseLetters(String string) throws IllegalArgumentException {
         ifStringNullOrEmptyThrowIllegalArgumentException(string);
 
@@ -113,6 +219,15 @@ public final class Str {
         return true;
     }
 
+    /**
+     * Method which evaluates whether the string is formed by only digits or
+     * not.
+     *
+     * @param string The original string to analyze
+     * @return A true or false boolean whether the string is formed by only
+     * digits or not
+     * @throws IllegalArgumentException If the passed string is empty or null
+     */
     public static final boolean isStringFormedByOnlyDigits(String string) throws IllegalArgumentException {
         ifStringNullOrEmptyThrowIllegalArgumentException(string);
 
@@ -124,16 +239,24 @@ public final class Str {
         return true;
     }
 
-    private static void ifStringNullOrEmptyThrowIllegalArgumentException(String string) throws IllegalArgumentException {
-        if (isNullOrEmpty(string)) {
-            throw new IllegalArgumentException("argument passed is null or a empty string");
-        }
-    }
-
+    /**
+     * Method which evaluates if a string is null/empty or not.
+     *
+     * @param string The original string to analyze
+     * @return A true or false boolean whether the passed string is null/empty
+     * or not
+     */
     public static final boolean isNullOrEmpty(String string) {
         return (string == null) || (string.trim().isEmpty());
     }
 
+    /**
+     * Method which evaluates if a string is NOT null/empty or otherwise.
+     *
+     * @param string The original string to analyze
+     * @return A true or false boolean whether the passed string is NOT
+     * null/empty or otherwise
+     */
     public static final boolean isNotNullOrEmpty(String string) {
         return !isNullOrEmpty(string);
     }

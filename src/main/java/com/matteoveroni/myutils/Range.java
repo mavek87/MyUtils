@@ -1,7 +1,6 @@
 package com.matteoveroni.myutils;
 
 /**
- *
  * @author Matteo Veroni
  */
 public class Range {

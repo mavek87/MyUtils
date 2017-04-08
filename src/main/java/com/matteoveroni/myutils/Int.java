@@ -4,7 +4,6 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 /**
- *
  * @author Matteo Veroni
  */
 public class Int {

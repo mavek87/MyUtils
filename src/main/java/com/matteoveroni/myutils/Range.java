@@ -9,6 +9,10 @@ public class Range {
     private final int highBorder;
 
     public Range(int lowRangeBorder, int highRangeBorder) {
+        if (lowRangeBorder > highRangeBorder) {
+            throw new IllegalArgumentException("Low range border is greater than high range border");
+        }
+
         this.lowBorder = lowRangeBorder;
         this.highBorder = highRangeBorder;
     }
@@ -19,5 +23,9 @@ public class Range {
 
     public int getHighBorder() {
         return highBorder;
+    }
+
+    public int getDimension() {
+        return highBorder - lowBorder;
     }
 }

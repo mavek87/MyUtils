@@ -3,12 +3,12 @@ package com.matteoveroni.myutils;
 /**
  * @author Matteo Veroni
  */
-public class Range {
+public class IntRange {
 
     private final int lowBorder;
     private final int highBorder;
 
-    public Range(int lowRangeBorder, int highRangeBorder) {
+    public IntRange(int lowRangeBorder, int highRangeBorder) {
         if (lowRangeBorder > highRangeBorder) {
             throw new IllegalArgumentException("Low range border is greater than high range border");
         }

@@ -9,13 +9,16 @@ import java.util.Random;
 public class Int {
 
     private static final Random RAND_GENERATOR = new SecureRandom();
-    
+
     public static int getRandomInteger(int min, int max) throws IllegalArgumentException {
         if (min < 0 || max < 0 || min >= max) {
             throw new IllegalArgumentException();
         }
-                
+
         return RAND_GENERATOR.nextInt((max - min) + 1) + min;
     }
 
+    public static int getRandomInteger(IntRange range) {
+        return getRandomInteger(range.getLowBorder(), range.getHighBorder());
+    }
 }

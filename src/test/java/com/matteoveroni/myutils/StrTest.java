@@ -18,7 +18,7 @@ public class StrTest {
     private static final String ONLY_DIGIT_STRING = "1234";
     private static final String MIXED_STRING = "Aa1;b23^?4zZ";
 
-    private Range randomNumberOfLettersRange;
+    private IntRange randomNumberOfLettersRange;
 
     @Test
     public void test_isStringFormedByOnlyLetters_Return_False_IfItsFalse_OrTrueIfItIs() {
@@ -49,7 +49,7 @@ public class StrTest {
         int lowBound = 2;
         int hiBound = 1;
 
-        randomNumberOfLettersRange = new Range(lowBound, hiBound);
+        randomNumberOfLettersRange = new IntRange(lowBound, hiBound);
         Str.generateRndLowercaseString(randomNumberOfLettersRange);
     }
 
@@ -58,7 +58,7 @@ public class StrTest {
         int hiBound = 2;
         int lowBound = hiBound;
 
-        randomNumberOfLettersRange = new Range(lowBound, hiBound);
+        randomNumberOfLettersRange = new IntRange(lowBound, hiBound);
         Str.generateRndLowercaseString(randomNumberOfLettersRange);
     }
 
@@ -67,7 +67,7 @@ public class StrTest {
         int lowBound = 1;
         int hiBound = 5;
 
-        randomNumberOfLettersRange = new Range(lowBound, hiBound);
+        randomNumberOfLettersRange = new IntRange(lowBound, hiBound);
 
         for (int i = 0; i < NUMBER_OF_TESTS_REPETITIONS; i++) {
             String generatedString = Str.generateRndLowercaseString(randomNumberOfLettersRange);

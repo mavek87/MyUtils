@@ -65,7 +65,7 @@ public final class Str {
      * lowBoundRange greater or equal than hiBoundRange, or bounds are minor or
      * equal than 0)
      */
-    public synchronized static final String generateUniqueRndLowercaseString(Range numberOfLettersRange) throws IllegalArgumentException {
+    public synchronized static final String generateUniqueRndLowercaseString(IntRange numberOfLettersRange) throws IllegalArgumentException {
         String generatedString;
         do {
             try {
@@ -89,7 +89,7 @@ public final class Str {
      * lowBoundRange greater or equal than hiBoundRange, or bounds are minor or
      * equal than 0)
      */
-    public static final String generateRndLowercaseString(Range numberOfLettersRange) throws IllegalArgumentException {
+    public static final String generateRndLowercaseString(IntRange numberOfLettersRange) throws IllegalArgumentException {
         ifRangeInvalidThrowIllegalArgumentException(numberOfLettersRange);
 
         int generatedNumberOfLetters = generateRandomNumberOfLetters(numberOfLettersRange);
@@ -116,7 +116,7 @@ public final class Str {
         return randomString.toString();
     }
 
-    private static int generateRandomNumberOfLetters(Range numberOfLettersRange) {
+    private static int generateRandomNumberOfLetters(IntRange numberOfLettersRange) {
         int minNumberOfLetters = numberOfLettersRange.getLowBorder();
         int maxNumberOfLetters = numberOfLettersRange.getHighBorder();
 
@@ -124,7 +124,7 @@ public final class Str {
         return (RANDOM_GENERATOR.nextInt(maxNumberOfLetters - minNumberOfLetters)) + minNumberOfLetters;
     }
 
-    private static void ifRangeInvalidThrowIllegalArgumentException(Range numberOfLettersRange) throws IllegalArgumentException {
+    private static void ifRangeInvalidThrowIllegalArgumentException(IntRange numberOfLettersRange) throws IllegalArgumentException {
         int minNumberOfLetters = numberOfLettersRange.getLowBorder();
         int maxNumberOfLetters = numberOfLettersRange.getHighBorder();
         if ((minNumberOfLetters > maxNumberOfLetters) || (minNumberOfLetters < 1) || (maxNumberOfLetters < 1)) {

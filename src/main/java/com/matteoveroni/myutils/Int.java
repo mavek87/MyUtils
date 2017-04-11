@@ -11,8 +11,8 @@ public class Int {
     private static final Random RAND_GENERATOR = new SecureRandom();
 
     public static int getRandomInteger(int min, int max) throws IllegalArgumentException {
-        if (min < 0 || max < 0 || min >= max) {
-            throw new IllegalArgumentException();
+        if (min < 0 || max < 0 || min > max) {
+            throw new IllegalArgumentException("min number is greater than max number");
         }
 
         return RAND_GENERATOR.nextInt((max - min) + 1) + min;

@@ -10,7 +10,7 @@ public class Int {
 
     private static final Random RAND_GENERATOR = new SecureRandom();
 
-    public static int getRandomInteger(int min, int max) throws IllegalArgumentException {
+    public static int getRandomInt(int min, int max) throws IllegalArgumentException {
         if (min < 0 || max < 0 || min > max) {
             throw new IllegalArgumentException("min number is greater than max number");
         }
@@ -18,7 +18,7 @@ public class Int {
         return RAND_GENERATOR.nextInt((max - min) + 1) + min;
     }
 
-    public static int getRandomInteger(IntRange range) {
-        return getRandomInteger(range.getLowBorder(), range.getHighBorder());
+    public static int getRandomInt(IntRange range) {
+        return Int.getRandomInt(range.getLowBorder(), range.getHighBorder());
     }
 }

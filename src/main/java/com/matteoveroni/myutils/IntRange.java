@@ -26,6 +26,6 @@ public class IntRange {
     }
 
     public int getDimension() {
-        return highBorder - lowBorder;
+        return (highBorder - lowBorder) + 1;
     }
 }

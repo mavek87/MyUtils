@@ -9,7 +9,7 @@ public class FormattedString {
 
     private String formattedString;
     private Object[] args;
-    
+
     public FormattedString() {
         this.formattedString = "";
     }
@@ -20,6 +20,7 @@ public class FormattedString {
 
     public FormattedString(String formattedString, Object... args) {
         this.formattedString = formattedString;
+        FormattedString f = new FormattedString();
         this.args = args;
     }
 
@@ -35,8 +36,8 @@ public class FormattedString {
         this.formattedString = formattedString;
     }
 
-    public void setArgs(Object[] args) {
-        this.args = args;
+    public void setArgs(Object... newArgs) {
+        System.arraycopy(newArgs, 0, args, 0, args.length + newArgs.length);
     }
 
     public FormattedString concat(FormattedString formattedStringToConcatenate) {

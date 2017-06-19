@@ -7,7 +7,7 @@ import java.lang.reflect.Array;
  */
 public class FormattedString {
 
-    private final String formattedString;
+    private String formattedString;
     private Object[] args;
 
     public FormattedString(String formattedString) {
@@ -25,6 +25,14 @@ public class FormattedString {
 
     public Object[] getArgs() {
         return args;
+    }
+
+    public void setFormattedString(String formattedString) {
+        this.formattedString = formattedString;
+    }
+
+    public void setArgs(Object[] args) {
+        this.args = args;
     }
 
     public FormattedString concat(FormattedString formattedStringToConcatenate) {

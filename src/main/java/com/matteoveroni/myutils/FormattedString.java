@@ -9,6 +9,10 @@ public class FormattedString {
 
     private String formattedString;
     private Object[] args;
+    
+    public FormattedString() {
+        this.formattedString = "";
+    }
 
     public FormattedString(String formattedString) {
         this.formattedString = formattedString;

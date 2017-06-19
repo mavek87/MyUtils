@@ -37,7 +37,11 @@ public class FormattedString {
     }
 
     public void setArgs(Object... newArgs) {
-        System.arraycopy(newArgs, 0, args, 0, args.length + newArgs.length);
+        if (args != null) {
+            System.arraycopy(newArgs, 0, args, 0, args.length + newArgs.length);
+        } else {
+            args = newArgs;
+        }
     }
 
     public FormattedString concat(FormattedString formattedStringToConcatenate) {

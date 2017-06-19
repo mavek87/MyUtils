@@ -46,7 +46,15 @@ public class FormattedString {
 
     public FormattedString concat(FormattedString formattedStringToConcatenate) {
         String concatFormattedString = formattedString + formattedStringToConcatenate.getFormattedString();
-        Object[] concatArgs = concatenate(args, formattedStringToConcatenate.getArgs());
+
+        Object[] concatArgs = args;
+        Object[] args_formattedStringToConcatenate = formattedStringToConcatenate.getArgs();
+
+        if (args != null && args_formattedStringToConcatenate != null) {
+            concatArgs = concatenate(args, args_formattedStringToConcatenate);
+        } else if (args == null && args_formattedStringToConcatenate != null) {
+            concatArgs = args_formattedStringToConcatenate;
+        }
         return new FormattedString(concatFormattedString, concatArgs);
     }
 

@@ -4,10 +4,10 @@ package com.matteoveroni.myutils;
  *
  * @author Matteo veroni
  * 
- * @version 1.9
+ * @version 2.0
  * 
  */
 public class MyUtilsVersion {
 
-    public static final String NUMBER = "1.9";
+    public static final String NUMBER = "2.0";
 }

@@ -1,6 +1,7 @@
 package com.matteoveroni.myutils;
 
 import java.security.SecureRandom;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -17,6 +18,41 @@ public final class Str {
 
     private static final Random RANDOM_GENERATOR = new SecureRandom();
     private static final Set<String> UNIQUE_RANDOM_STRINGS_GENERATED = new HashSet<>();
+
+    /**
+     *
+     * Method which concatenates each String passed into a unique string. (eg.
+     * Str.concat("Hello", " World!"); returns => "Hello World!".
+     *
+     * @param strings Strings to concatenate passed to this method
+     * @return The concatenation of each string passed to this method
+     */
+    public static final String concat(String... strings) {
+        StringBuilder stringBuilder = new StringBuilder();
+        concatStrings(strings, stringBuilder);
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Method which concatenates a collection of strings into a unique string.
+     *
+     * @param strings A collection of strings to concatenate into a unique
+     * string
+     * @return A unique string formed by the concatenation of a collection of
+     * strings
+     */
+    public static final String concat(Collection<String> strings) {
+        final StringBuilder stringBuilder = new StringBuilder();
+        concatStrings(strings.toArray(new String[strings.size()]), stringBuilder);
+        return stringBuilder.toString();
+    }
+
+    private static StringBuilder concatStrings(String[] strings, StringBuilder stringBuilder) {
+        for (String s : strings) {
+            stringBuilder.append(s);
+        }
+        return stringBuilder;
+    }
 
     /**
      * Generate a random lowercase string with random length between a number of

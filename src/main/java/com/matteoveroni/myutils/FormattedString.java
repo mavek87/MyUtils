@@ -7,25 +7,25 @@ import java.lang.reflect.Array;
  */
 public class FormattedString {
 
-    private String formattedString;
+    private String internalString;
     private Object[] args;
 
     public FormattedString() {
-        this.formattedString = "";
+        this.internalString = "";
     }
 
     public FormattedString(String formattedString) {
-        this.formattedString = formattedString;
+        this.internalString = formattedString;
     }
 
     public FormattedString(String formattedString, Object... args) {
-        this.formattedString = formattedString;
+        this.internalString = formattedString;
         FormattedString f = new FormattedString();
         this.args = args;
     }
 
     public String getFormattedString() {
-        return formattedString;
+        return internalString;
     }
 
     public Object[] getArgs() {
@@ -33,7 +33,7 @@ public class FormattedString {
     }
 
     public void setFormattedString(String formattedString) {
-        this.formattedString = formattedString;
+        this.internalString = formattedString;
     }
 
     public void setArgs(Object... newArgs) {
@@ -45,7 +45,7 @@ public class FormattedString {
     }
 
     public FormattedString concat(FormattedString formattedStringToConcatenate) {
-        String concatFormattedString = formattedString + formattedStringToConcatenate.getFormattedString();
+        String concatFormattedString = internalString + formattedStringToConcatenate.getFormattedString();
 
         Object[] concatArgs = args;
         Object[] args_formattedStringToConcatenate = formattedStringToConcatenate.getArgs();

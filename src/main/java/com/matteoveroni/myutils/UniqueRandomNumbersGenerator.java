@@ -9,15 +9,13 @@ public class UniqueRandomNumbersGenerator {
     private final int maxNumberOfExtractions;
     private final IntRange rangeOfExtractableIntegers;
 
-    public UniqueRandomNumbersGenerator(int minNumber, int maxNumber) {
-        rangeOfExtractableIntegers = new IntRange(minNumber, maxNumber);
-        checkRangeOfExtractableIntegersDimensionValidity();
+    public UniqueRandomNumbersGenerator(IntRange range) {
+        rangeOfExtractableIntegers = range;
         this.maxNumberOfExtractions = rangeOfExtractableIntegers.getDimension();
     }
 
-    public UniqueRandomNumbersGenerator(int minNumber, int maxNumber, int maxNumberOfExtractions) {
-        rangeOfExtractableIntegers = new IntRange(minNumber, maxNumber);
-        checkRangeOfExtractableIntegersDimensionValidity();
+    public UniqueRandomNumbersGenerator(IntRange range, int maxNumberOfExtractions) {
+        rangeOfExtractableIntegers = range;
         if (maxNumberOfExtractions < rangeOfExtractableIntegers.getDimension()) {
             this.maxNumberOfExtractions = maxNumberOfExtractions;
         } else {
@@ -36,12 +34,6 @@ public class UniqueRandomNumbersGenerator {
             extractedUniqueRandNumbers.add(number);
         } while (extractedUniqueRandNumbers.size() == initialSizeOfExtractedNumbers);
         return number;
-    }
-
-    private void checkRangeOfExtractableIntegersDimensionValidity() {
-        if (rangeOfExtractableIntegers.getDimension() < 1) {
-            throw new IllegalArgumentException("Range dimension of extractable numbers must be greater than 0");
-        }
     }
 
     public class NoMoreUniqueRandNumberExtractableException extends Exception {
